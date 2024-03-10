@@ -18,7 +18,7 @@ def login(name, password, driver):
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/form/div[1]/input').send_keys(name)
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/form/div[2]/input').send_keys(password)
     
-    input("Ready to login?")
+    time.sleep(1)
     driver.find_element(By.XPATH, '/html/body/div/div[2]/div/form/div[5]/button').click()
 
     # Check for valid login
@@ -27,29 +27,59 @@ def login(name, password, driver):
     # else:
     #     raise Exception("Login failed!")
     
-    input("Continue?")
+    # Wait until the page has loaded
+    driver.implicitly_wait(5)
+
     select(driver)
 
 
 def select(driver):
-    # driver.get(links.main_calendar)
-
-    elem = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[1]/div/div[3]/div[3]/div[2]')
-    # Monday, March 11, 2024
-    day_title = "Monday, March 11, 2024" #NOTE dynamic date
-    # elem = driver.find_element_by_xpath(f"//a[@title='{day_title}']")
-    # elem = driver.find_element(By.XPATH, f"//a[@title='{day_title}']")
-    elem.click()
-    driver.implicitly_wait(2)
-    # Start Time
-    driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[2]/div[1]/div[1]/ul/li[6]').click()
-    driver.implicitly_wait(2) #NOTE dynamic time
     
-    # End Time 
-    driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[2]/div[2]/div[1]/ul/li[8]').click()
-    driver.implicitly_wait(2) #NOTE dynamic time
-    # driver.find_element(By.XPATH, ).click()
+    #NOTE Wait until fully loaded
+    
+    # Looking with title
+    # val = "Wednesday, March 13, 2024"
+    
+    elem = driver.find_element(By.NAME, "Tuesday, March 12, 2024")
+    # elem = driver.find_element(By.XPATH, '//a[@title="Tuesday, March 12, 2024"]')
+    
+    # Looking with XPATH
+    # elem = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[1]/div/div[3]/div[3]/div[2]')
+    
+    js_code = "arguments[0].scrollIntoView();"
+    driver.execute_script(js_code, elem)
+    # time.sleep(2)
+    elem.click() 
+    
+    day_title = "Monday, March 11, 2024" #NOTE dynamic date
+    # elem = driver.find_element(By.XPATH, f"//a[@title='{day_title}']")
 
+    
+    # Start Time
+    elem = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[2]/div[1]/div[1]/ul/li[6]')
+    # time.sleep(1)
+    driver.execute_script("arguments[0].scrollIntoView();", elem)
+    # time.sleep(1)
+    elem.click()
+
+
+
+    # End Time 
+    elem = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[2]/div[2]/div[1]/ul/li[8]')
+    # time.sleep(1)
+    driver.execute_script("arguments[0].scrollIntoView();", elem)
+    # time.sleep(1)
+    elem.click()
     # Print out seat count
-    seats = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[3]/div/div/span').text()
+    # seats = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[3]/div/div/span').text()
+    seats = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div[3]/div/div/span')
     print(seats)
+
+    # Book
+    # elem = driver.find_element(By.XPATH, '/html/body/div/div/div/div[2]/main/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div[3]/div/div[2]/button[2]/span[1]/span')
+    # time.sleep(1)
+    # driver.execute_script("arguments[0].scrollIntoView();", elem)
+    # time.sleep(1)
+    # elem.click()
+
+    return 

@@ -6,6 +6,8 @@ from selenium import webdriver
 import schedule 
 import time
 from datetime import datetime
+from webdriver_manager.firefox import GeckoDriverManager
+
 
 load_dotenv()
 
@@ -32,7 +34,10 @@ def do_smth():
 
 
 def book():
-    driver = webdriver.Firefox()
+    # driver = webdriver.Firefox()
+    # driver = webdriver.Firefox(executable_path="D:\Path Files\geckodriver.exe")
+    # driver = webdriver.Chrome(executable_path="D:\Path Files\chromedriver.exe")
+    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
 
     login.login(name, password, driver)
     
