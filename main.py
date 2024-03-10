@@ -40,5 +40,5 @@ def book():
 
 
 if __name__ == "__main__":
-    main()
+    book()
     print("Bye!")   

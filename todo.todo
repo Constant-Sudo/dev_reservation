@@ -1,0 +1,14 @@
+Direkter Buchungsablauf: 
+    ✔ Login @done(24-03-10 11:54)
+    ✔ Navigation @done(24-03-10 11:55)
+    ☐ Zeitauswahl
+    ☐ Tag auswählen
+    ☐ Startzeit (HTML List)
+    ☐ Endzeit (HTML List)
+    ☐ Verfügbarkeitprüfung -> Error Handling
+    ☐ @optional: Tisch aussuchen
+    ☐ Buchung abschließen
+    ☐ Mail mit PDF Download verschicken
+
+Probleme:
+    ☐ Dynamisch Tag und Uhrzeit auswählen -> Title 
